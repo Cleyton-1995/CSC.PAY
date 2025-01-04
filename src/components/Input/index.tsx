@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextInput } from "react-native-paper";
+import { HelperText, TextInput } from "react-native-paper";
 
 interface InputProps {
   label: string;
@@ -7,6 +7,8 @@ interface InputProps {
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
   keyboardType?: string;
+  autoCapitalize?: "none" | "sentences" | "words" | "characters";
+  errorMessage?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -15,6 +17,8 @@ const Input: React.FC<InputProps> = ({
   onChangeText,
   secureTextEntry = false,
   keyboardType,
+  errorMessage,
+  autoCapitalize
 }) => {
   const [password, setPassword] = useState(secureTextEntry);
   return (
@@ -26,6 +30,8 @@ const Input: React.FC<InputProps> = ({
         onChangeText={onChangeText}
         secureTextEntry={password}
         mode="outlined"
+        error={!!errorMessage}
+        autoCapitalize={autoCapitalize}
       />
       {secureTextEntry && (
         <TouchableOpacity onPress={() => setPassword(!password)}>
@@ -38,6 +44,7 @@ const Input: React.FC<InputProps> = ({
           </Text>
         </TouchableOpacity>
       )}
+      {errorMessage && <HelperText type="error">{errorMessage}</HelperText>}
     </>
   );
 };

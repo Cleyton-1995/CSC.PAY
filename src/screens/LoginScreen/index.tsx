@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text, Alert } from "react-native";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { COLORS } from "../../themes/colors";
@@ -7,11 +7,34 @@ import { COLORS } from "../../themes/colors";
 const LoginScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+
+  const validateForm = () => {
+    const newErrors: { email?: string; password?: string } = {};
+    if (!email) {
+      newErrors.email = "O email é obrigatório.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "O email não é válido.";
+    }
+
+    if (!password) {
+      newErrors.password = "A senha é obrigatória.";
+    } else if (password.length < 6) {
+      newErrors.password = "A senha deve ter pelo menos 6 caracteres.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
 
   const handleLogin = () => {
-    // Lógica para autenticação
-    console.log("Login com:", email, password);
-    navigation.navigate("Home");
+    if (validateForm()) {
+      console.log("Login com:", email, password);
+      navigation.navigate("Home");
+    } else {
+      Alert.alert("Erro", "Por favor, corrija os erros no formulário.");
+    }
   };
 
   return (
@@ -31,13 +54,26 @@ const LoginScreen = ({ navigation }: any) => {
           keyboardType="email-adress"
           label="Email"
           value={email}
-          onChangeText={setEmail}
+          autoCapitalize="none"
+          onChangeText={(text) => {
+            setEmail(text);
+            if (errors.email) {
+              setErrors({ ...errors, email: undefined });
+            }
+          }}
+          errorMessage={errors.email}
         />
         <Input
           label="Senha"
           value={password}
-          onChangeText={setPassword}
+          onChangeText={(text) => {
+            setPassword(text);
+            if (errors.password) {
+              setErrors({ ...errors, password: undefined });
+            }
+          }}
           secureTextEntry
+          errorMessage={errors.password}
         />
         <Button
           buttonStyle={styles.button}
@@ -104,7 +140,7 @@ const styles = StyleSheet.create({
   title: {
     color: COLORS.BLUE_500,
     textAlign: "center",
-    fontSize: 35,
+    fontSize: 25,
     fontWeight: "bold",
     top: -10,
   },

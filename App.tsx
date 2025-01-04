@@ -10,12 +10,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import CreateInvoiceScreen from "./src/screens/CreateInvoiceScreen";
 import ClientsListScreen from "./src/screens/ClientsListScreen";
 import InvoiceDetailsScreen from "./src/screens/InvoiceDetailsScreen";
-// import SignupScreen from './screens/SignupScreen';
-// import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
-// import UserProfileScreen from './screens/UserProfileScreen';
-// import HomeScreen from './screens/HomeScreen';
-// import CreateChargeScreen from './screens/CreateChargeScreen';
-// import ClientListScreen from './screens/ClientListScreen';
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 const Stack = createNativeStackNavigator();
 
@@ -68,5 +63,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     fontFamily: "Roboto",
+    paddingTop: getStatusBarHeight() + 17,
   },
 });
