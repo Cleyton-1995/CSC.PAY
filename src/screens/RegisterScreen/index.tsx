@@ -92,7 +92,7 @@ const RegisterScreen = ({ navigation }: any) => {
       <View style={styles.imgContainer}>
         <Image
           style={styles.img}
-          source={require("../../assets/pagarme.png")}
+          source={require("../../assets/cscpay.png")}
           resizeMode="contain"
         />
       </View>

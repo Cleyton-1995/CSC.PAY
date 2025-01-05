@@ -65,14 +65,14 @@ const ForgotPasswordScreen = ({ navigation }: any) => {
       <View style={styles.imgContainer}>
         <Image
           style={styles.img}
-          source={require("../../assets/pagarme.png")}
+          source={require("../../assets/cscpay.png")}
           resizeMode="contain"
         />
       </View>
 
       <View style={styles.headerContainer}>
         <BackButton onPress={backLogin} />
-        <Text style={styles.title}>Cadastre-se</Text>
+        <Text style={styles.title}>Recuperar Senha</Text>
       </View>
 
       <View style={styles.mainContainer}>

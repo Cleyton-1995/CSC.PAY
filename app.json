@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "pagarme-mobile",
-    "slug": "pagarme-mobile",
+    "name": "cscpay-mobile",
+    "slug": "cscpay-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/splash-icon.png",
+    "icon": "./assets/cscpay.png.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
