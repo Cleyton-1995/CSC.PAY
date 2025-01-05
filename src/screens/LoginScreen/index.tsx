@@ -3,11 +3,14 @@ import { View, StyleSheet, Image, Text, Alert } from "react-native";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { COLORS } from "../../themes/colors";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 const LoginScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>(
+    {}
+  );
 
   const validateForm = () => {
     const newErrors: { email?: string; password?: string } = {};
@@ -26,7 +29,6 @@ const LoginScreen = ({ navigation }: any) => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
 
   const handleLogin = () => {
     if (validateForm()) {
@@ -56,9 +58,11 @@ const LoginScreen = ({ navigation }: any) => {
           value={email}
           autoCapitalize="none"
           onChangeText={(text) => {
-            setEmail(text);
-            if (errors.email) {
-              setErrors({ ...errors, email: undefined });
+            if (text.length <= 50) {
+              setEmail(text);
+              if (errors.email) {
+                setErrors({ ...errors, email: undefined });
+              }
             }
           }}
           errorMessage={errors.email}
@@ -67,9 +71,11 @@ const LoginScreen = ({ navigation }: any) => {
           label="Senha"
           value={password}
           onChangeText={(text) => {
-            setPassword(text);
-            if (errors.password) {
-              setErrors({ ...errors, password: undefined });
+            if (text.length <= 20) {
+              setPassword(text);
+              if (errors.password) {
+                setErrors({ ...errors, password: undefined });
+              }
             }
           }}
           secureTextEntry
@@ -103,6 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 20,
+    paddingTop: getStatusBarHeight() + 17,
   },
 
   button: {
