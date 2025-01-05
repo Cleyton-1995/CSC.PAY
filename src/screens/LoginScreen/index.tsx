@@ -44,6 +44,22 @@ const LoginScreen = ({ navigation }: any) => {
     }
   };
 
+  function handleRegister() {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("Signup");
+    }, 2000); // Simulação de carregamento de 2 segundos
+  }
+
+  function handleForgotPassword() {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("ForgotPassword");
+    }, 2000); // Simulação de carregamento de 2 segundos
+  }
+
   return (
     <View style={styles.container}>
       {loading && (
@@ -95,7 +111,7 @@ const LoginScreen = ({ navigation }: any) => {
         <Button
           buttonStyle={styles.button}
           title="Esqueci minha senha"
-          onPress={() => navigation.navigate("ForgotPassword")}
+          onPress={handleForgotPassword}
           mode="text"
           backgroundColor={COLORS.WHITE}
           textColor={COLORS.BLUE_500}
@@ -107,7 +123,7 @@ const LoginScreen = ({ navigation }: any) => {
           backgroundColor={COLORS.GRAY_QUINTENAY}
           textColor={COLORS.BLUE_500}
           title="Cadastrar-se"
-          onPress={() => navigation.navigate("Signup")}
+          onPress={handleRegister}
           mode="text"
         />
       </View>
