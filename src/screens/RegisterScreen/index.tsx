@@ -75,7 +75,11 @@ const RegisterScreen = ({ navigation }: any) => {
   };
 
   function backLogin() {
-    navigation.navigate("Login");
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("Login");
+    }, 2000); // Simulação de carregamento de 2 segundos
   }
 
   return (

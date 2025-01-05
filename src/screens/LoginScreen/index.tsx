@@ -4,6 +4,7 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { COLORS } from "../../themes/colors";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { ActivityIndicator } from "react-native-paper";
 
 const LoginScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ const LoginScreen = ({ navigation }: any) => {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
+  const [loading, setLoading] = useState(false);
 
   const validateForm = () => {
     const newErrors: { email?: string; password?: string } = {};
@@ -32,8 +34,11 @@ const LoginScreen = ({ navigation }: any) => {
 
   const handleLogin = () => {
     if (validateForm()) {
-      console.log("Login com:", email, password);
-      navigation.navigate("Home");
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        navigation.navigate("Home");
+      }, 2000); // Simulação de carregamento de 2 segundos
     } else {
       Alert.alert("Erro", "Por favor, corrija os erros no formulário.");
     }
@@ -41,6 +46,12 @@ const LoginScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      {loading && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={COLORS.BLUE_500} />
+        </View>
+      )}
+
       <View style={styles.imgContainer}>
         <Image
           style={styles.img}
@@ -150,6 +161,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     top: -10,
+  },
+
+  loadingContainer: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1,
   },
 });
 
