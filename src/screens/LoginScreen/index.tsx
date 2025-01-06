@@ -14,34 +14,35 @@ const LoginScreen = ({ navigation }: any) => {
   );
   const [loading, setLoading] = useState(false);
 
-  const validateForm = () => {
-    const newErrors: { email?: string; password?: string } = {};
-    if (!email) {
-      newErrors.email = "O email é obrigatório.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = "O email não é válido.";
-    }
+  // const validateForm = () => {
+  //   const newErrors: { email?: string; password?: string } = {};
+  //   if (!email) {
+  //     newErrors.email = "O email é obrigatório.";
+  //   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  //     newErrors.email = "O email não é válido.";
+  //   }
 
-    if (!password) {
-      newErrors.password = "A senha é obrigatória.";
-    } else if (password.length < 6) {
-      newErrors.password = "A senha deve ter pelo menos 6 caracteres.";
-    }
+  //   if (!password) {
+  //     newErrors.password = "A senha é obrigatória.";
+  //   } else if (password.length < 6) {
+  //     newErrors.password = "A senha deve ter pelo menos 6 caracteres.";
+  //   }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
 
   const handleLogin = () => {
-    if (validateForm()) {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        navigation.navigate("Home");
-      }, 2000); // Simulação de carregamento de 2 segundos
-    } else {
-      Alert.alert("Erro", "Por favor, corrija os erros no formulário.");
-    }
+    // if (validateForm()) {
+    //   setLoading(true);
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //     navigation.navigate("Home");
+    //   }, 2000); // Simulação de carregamento de 2 segundos
+    // } else {
+    //   Alert.alert("Erro", "Por favor, corrija os erros no formulário.");
+    // }
+    navigation.navigate("Home");
   };
 
   function handleRegister() {
@@ -84,29 +85,31 @@ const LoginScreen = ({ navigation }: any) => {
           label="Email"
           value={email}
           autoCapitalize="none"
-          onChangeText={(text) => {
-            if (text.length <= 50) {
-              setEmail(text);
-              if (errors.email) {
-                setErrors({ ...errors, email: undefined });
-              }
-            }
-          }}
-          errorMessage={errors.email}
+          onChangeText={setEmail}
+          // onChangeText={(text) => {
+          //   if (text.length <= 50) {
+          //     setEmail(text);
+          //     if (errors.email) {
+          //       setErrors({ ...errors, email: undefined });
+          //     }
+          //   }
+          // }}
+          // errorMessage={errors.email}
         />
         <Input
           label="Senha"
           value={password}
-          onChangeText={(text) => {
-            if (text.length <= 20) {
-              setPassword(text);
-              if (errors.password) {
-                setErrors({ ...errors, password: undefined });
-              }
-            }
-          }}
+          // onChangeText={(text) => {
+          //   if (text.length <= 20) {
+          //     setPassword(text);
+          //     if (errors.password) {
+          //       setErrors({ ...errors, password: undefined });
+          //     }
+          //   }
+          // }}
+          // errorMessage={errors.password}
           secureTextEntry
-          errorMessage={errors.password}
+          onChangeText={setPassword}
         />
         <Button
           buttonStyle={styles.button}

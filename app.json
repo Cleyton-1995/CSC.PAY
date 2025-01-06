@@ -4,7 +4,7 @@
     "slug": "cscpay-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/cscpay.png.png",
+    "icon": "./assets/cscpay.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
